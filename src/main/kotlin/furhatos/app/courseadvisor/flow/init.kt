@@ -2,6 +2,7 @@ package furhatos.app.courseadvisor.flow
 
 import furhatos.app.courseadvisor.flow.main.Idle
 import furhatos.app.courseadvisor.flow.main.Greeting
+import furhatos.app.courseadvisor.flow.main.ListCourses
 import furhatos.app.courseadvisor.setting.DISTANCE_TO_ENGAGE
 import furhatos.app.courseadvisor.setting.MAX_NUMBER_OF_USERS
 import furhatos.flow.kotlin.State
@@ -17,10 +18,10 @@ val Init: State = state {
     onEntry {
         /** start interaction */
         when {
-            furhat.isVirtual() -> goto(Greeting) // Convenient to bypass the need for user when running Virtual Furhat
+            furhat.isVirtual() -> goto(ListCourses) // Convenient to bypass the need for user when running Virtual Furhat
             users.hasAny() -> {
                 furhat.attend(users.random)
-                goto(Greeting)
+                goto(ListCourses)
             }
             else -> goto(Idle)
         }
